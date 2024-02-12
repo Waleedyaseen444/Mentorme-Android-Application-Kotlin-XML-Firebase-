@@ -42,7 +42,7 @@ class Profile : AppCompatActivity() {
         val favoriteMentors = listOf(
             Mentor("John Cooper", "UX Designer", "Available", true),
             Mentor("Emma Phillips", "Lead Technology Officer", "Available", true),
-            Mentor("Micheals", "UX developerr", "Available", true),
+            Mentor("Micheals", "UX developer", "Available", true),
             Mentor("Emma Phillips", "Lead Technology Officer", "Available", true),
 
             )
