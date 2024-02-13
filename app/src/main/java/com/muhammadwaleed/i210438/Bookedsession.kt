@@ -6,27 +6,24 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class Bookedsession : AppCompatActivity() {
+import android.content.Intent
+
+import android.view.View
+
+
+class BookedSessions : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookedsession)
 
-        val backButton = findViewById<ImageButton>(R.id.imageButton5)
+        val backButton = findViewById<ImageButton>(R.id.backbutton)
+
         backButton.setOnClickListener {
-            finish()
-        }
-
-        val sessionList = listOf(
-            SessionDetails("John Cooper", "UX Designer @ Google", "24th Dec 2023", "1:00 pm", R.drawable.imag1),
-            SessionDetails("Emma Phillips", "Android Developer", "1st Jan 2024", "9:00 pm", R.drawable.imag2)
-        )
-
-        val sessionsRecyclerView = findViewById<RecyclerView>(R.id.sessionsRecyclerView).apply {
-            layoutManager = LinearLayoutManager(this@Bookedsession)
-            adapter = SessionsAdapter(sessionList) { session ->
-
-            }
-            setHasFixedSize(true)
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
         }
     }
+
+
 }
