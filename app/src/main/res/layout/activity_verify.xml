@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D9F2F2"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvVerifyYourNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Verify your phone number"
+        android:textColor="#04685F"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvSentCodeTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvVerifyYourNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="We've sent a code to " />
+
+    <LinearLayout
+        android:id="@+id/llCodeContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/tvSentCodeTo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <!-- Individual EditTexts for code input -->
+        <EditText
+            android:id="@+id/etCode1"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#04685F" />
+
+        <EditText
+            android:id="@+id/etCode2"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#04685F" />
+
+        <EditText
+            android:id="@+id/etCode3"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#04685F" />
+
+        <EditText
+            android:id="@+id/etCode4"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#04685F" />
+
+        <EditText
+            android:id="@+id/etCode5"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:maxLength="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#04685F" />
+
+
+
+        <!-- Repeat for etCode2, etCode3, etCode4, and etCode5 with similar attributes -->
+        <!-- Make sure to define unique IDs for each EditText (etCode2, etCode3, etc.) -->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnVerify"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llCodeContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/rectangle"
+        android:text="Verify"
+        android:textColor="#E8EDED" />
+
+    <TextView
+        android:id="@+id/tvResendCodeTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnVerify"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Send code again in 00:30"
+        android:textColor="#04685F" />
+
+    <GridView
+        android:id="@+id/gvNumberPad"
+        android:layout_width="354dp"
+        android:layout_height="439dp"
+        android:layout_below="@id/tvResendCodeTimer"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp" />
+
+</RelativeLayout>
