@@ -21,11 +21,23 @@ class Profile : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val backButton = findViewById<ImageButton>(R.id.imageButton9)
 
+        backButton.setOnClickListener {
+            val intent = Intent(this, MainActivity3::class.java)
+            startActivity(intent)
+        }
+
+        val backbutton = findViewById<ImageButton>(R.id.imageButton9)
+        backbutton.setOnClickListener {
+            val intent = Intent(this, MainActivity3::class.java)
+            startActivity(intent)
+
+        }
 
         val bookedSessionsButton: Button = findViewById(R.id.button7)
         bookedSessionsButton.setOnClickListener {
-            val intent = Intent(this, Bookedsession::class.java)
+            val intent = Intent(this, BookedSessions::class.java)
             startActivity(intent)
         }
 
