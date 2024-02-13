@@ -20,7 +20,6 @@ class Editprofile : AppCompatActivity() {
 
         val back = findViewById<ImageButton>(R.id.backbutton)
         back.setOnClickListener {
-            // Navigate back to the previous activity
             onBackPressed()
         }
     }
