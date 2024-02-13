@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D9F2F2">
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Forgot Password?"
+        android:textColor="#4169E1"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvForgotPassword"
+        android:layout_marginTop="30dp"
+        android:text="Don't worry! It happens. Please enter the email associated with your account."
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvInstructions"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edit_text"
+
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_text"
+
+        android:text="Send"
+        android:textColor="#0E0E0E"
+        android:textSize="18sp" />
+
+    <!-- Combined Text for 'Remember your password?' and 'LOGIN' -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSend"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tvRememberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember your password?"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tvRememberPassword"
+            android:text="Login"
+            android:textColor="#4169E1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingLeft="4dp"
+        android:paddingStart="4dp" />
+    </RelativeLayout>
+</RelativeLayout>
