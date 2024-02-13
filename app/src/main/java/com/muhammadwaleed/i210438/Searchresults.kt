@@ -63,10 +63,10 @@ class Searchresults : AppCompatActivity() {
     private fun createDataList(): List<Recentdata> {
 
         return listOf(
-            Recentdata("Grorge", "UI designer", "Available", "$50", R.drawable.img1, R.drawable.hearts),
+            Recentdata("Grorge", "UI designer", "Available", "$50", R.drawable.imag4, R.drawable.hearts),
             Recentdata("Sam 2", "Lead technology officer", "Available", "$60", R.drawable.img2, R.drawable.hearts),
             Recentdata("Michael 3", "Lead technology officer", "Not Available", "$60", R.drawable.img3, R.drawable.ic_heart_outline),
-            Recentdata("Henry 4", "Lead technology officer", "Available", "$60", R.drawable.img4, R.drawable.hearts),
+            Recentdata("Henry 4", "Lead technology officer", "Available", "$60", R.drawable.imag4, R.drawable.hearts),
             Recentdata("Jack 5", "Lead technology officer", "Not Available", "$60", R.drawable.img5, R.drawable.ic_heart_outline),
 
             )
