@@ -1,5 +1,6 @@
 package com.muhammadwaleed.i210438
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,10 @@ class FavouriteMentorsAdapter(private val mentors: List<Mentor>) :
         )
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Clicked on ${mentor.name}", Toast.LENGTH_SHORT).show()
+            val context = it.context
+            val intent = Intent(context, Mentordetails::class.java)
+            intent.putExtra("mentorName", mentor.name)
+            context.startActivity(intent)
         }
     }
 
