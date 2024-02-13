@@ -26,13 +26,12 @@ class Chat : AppCompatActivity() {
             startActivity(intent)
         }
 
-        adapter = MessagesAdapter(getPersonList()) { person ->
-
+        adapter = MessagesAdapter(getPersonList()) {
             val intent = Intent(this, Chatopen::class.java)
-            intent.putExtra("image", person.imageResource)
             startActivity(intent)
-
         }
+
+
         communityRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         communityRecyclerView.adapter = communityAdapter
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
