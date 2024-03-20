@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class ReviewsAdapter(private val reviews: List<Review>) :
+class ReviewsAdapter(private var reviews: List<Review>) :
     RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder>() {
 
     class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,10 +32,17 @@ class ReviewsAdapter(private val reviews: List<Review>) :
         holder.itemView.setOnClickListener {
             val context = it.context
             val intent = Intent(context, Feedback::class.java)
-            intent.putExtra("reviewerName", review.reviewerName)
+            intent.putExtra("MENTOR_NAME", review.reviewerName)
             context.startActivity(intent)
         }
     }
 
-    override fun getItemCount() = reviews.size
+    override fun getItemCount(): Int {
+        return reviews.size
+    }
+
+    fun setData(newList: List<Review>) {
+        reviews = newList
+        notifyDataSetChanged()
+    }
 }

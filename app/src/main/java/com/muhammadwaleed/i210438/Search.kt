@@ -3,7 +3,6 @@ package com.muhammadwaleed.i210438
 import RecentSearchesAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
@@ -21,18 +20,15 @@ class Search : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         setupRecentSearchesRecyclerView()
-        val SearchBtn=findViewById<ImageButton>(R.id.btnSearch)
-        SearchBtn.setOnClickListener{
-            val intent = Intent(this, Searchresults::class.java)
-            startActivity(intent)
-        }
+
         val searchBar = findViewById<EditText>(R.id.search_bar)
-        searchBar.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch(v.text.toString())
-                true
+        val searchButton = findViewById<ImageButton>(R.id.btnSearch)
+        searchButton.setOnClickListener {
+            val query = searchBar.text.toString().trim()
+            if (query.isNotEmpty()) {
+                performSearch(query)
             } else {
-                false
+                Toast.makeText(this, "Please enter a search query", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -67,25 +63,20 @@ class Search : AppCompatActivity() {
         }
     }
 
-
-
     private fun setupRecentSearchesRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_recent_searches)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recentSearchesAdapter = RecentSearchesAdapter(recentSearchesList,
             onItemClick = { query ->
-                val intent = Intent(this, Searchresults::class.java)
-                intent.putExtra("query", query)
-                startActivity(intent)
+                performSearch(query)
             },
             onItemRemoved = { removedItem ->
                 recentSearchesList.remove(removedItem)
                 recentSearchesAdapter.notifyDataSetChanged()
-                Toast.makeText(this, "$removedItem removed", Toast.LENGTH_SHORT).show()
+                // Handle item removed if needed
             })
         recyclerView.adapter = recentSearchesAdapter
     }
-
 
     private fun performSearch(query: String) {
         val intent = Intent(this, Searchresults::class.java)

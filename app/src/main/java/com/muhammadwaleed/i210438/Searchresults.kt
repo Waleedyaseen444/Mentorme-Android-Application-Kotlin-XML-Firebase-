@@ -1,30 +1,41 @@
 package com.muhammadwaleed.i210438
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class Searchresults : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: RecentAdapter
+    private lateinit var database: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_searchresults)
 
-        val BackBtn=findViewById<ImageButton>(R.id.backBtn)
-        BackBtn.setOnClickListener{
+        database = FirebaseDatabase.getInstance().reference.child("mentors")
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Extracting search query
+        val query = intent.getStringExtra("query") ?: ""
+
+        fetchMentors(query)
+
+        val backButton = findViewById<ImageButton>(R.id.backBtn)
+        backButton.setOnClickListener {
             val intent = Intent(this, Search::class.java)
             startActivity(intent)
         }
-
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val dataList = createDataList()
-        val adapter = RecentAdapter(dataList)
-        recyclerView.adapter = adapter
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->
@@ -57,18 +68,37 @@ class Searchresults : AppCompatActivity() {
         }
     }
 
+    private fun fetchMentors(query: String) {
+        val mentorList = mutableListOf<Recentdata>()
 
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mentorList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val mentor = dataSnapshot.getValue(Mentorhome::class.java)
+                    mentor?.let {
+                        // Check if mentor name or occupation contains the query
+                        if (mentor.name?.contains(query, ignoreCase = true) == true ||
+                            mentor.occupation?.contains(query, ignoreCase = true) == true) {
+                            mentorList.add(Recentdata(
+                                mentor.name ?: "",
+                                mentor.occupation ?: "",
+                                mentor.status ?: "",
+                                mentor.pricePerSession ?: "",
+                                mentor.imageUrl ?: "", // Use mentor image URL
+                            ))
+                        }
+                    }
+                }
+                Log.d("SearchResults", "Filtered List Size: ${mentorList.size}")
+                adapter = RecentAdapter(mentorList)
+                recyclerView.adapter = adapter
+            }
 
-
-    private fun createDataList(): List<Recentdata> {
-
-        return listOf(
-            Recentdata("Grorge", "UI designer", "Available", "$50", R.drawable.imag4, R.drawable.hearts),
-            Recentdata("Sam 2", "Lead technology officer", "Available", "$60", R.drawable.img2, R.drawable.hearts),
-            Recentdata("Michael 3", "Lead technology officer", "Not Available", "$60", R.drawable.img3, R.drawable.ic_heart_outline),
-            Recentdata("Henry 4", "Lead technology officer", "Available", "$60", R.drawable.imag4, R.drawable.hearts),
-            Recentdata("Jack 5", "Lead technology officer", "Not Available", "$60", R.drawable.img5, R.drawable.ic_heart_outline),
-
-            )
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+                Log.e("SearchResults", "Firebase fetch error: ${error.message}")
+            }
+        })
     }
 }
