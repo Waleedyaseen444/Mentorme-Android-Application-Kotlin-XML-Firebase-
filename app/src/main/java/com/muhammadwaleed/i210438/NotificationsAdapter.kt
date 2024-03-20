@@ -9,18 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammadwaleed.i210438.R
 
 class NotificationsAdapter(
-    private val notifications: MutableList<Notification>,
+    private var notifications: MutableList<Notification>,
     private val onItemDismiss: (Notification) -> Unit
 ) : RecyclerView.Adapter<NotificationsAdapter.NotificationViewHolder>() {
 
-    class NotificationViewHolder(view: View, onItemDismiss: (Notification) -> Unit) : RecyclerView.ViewHolder(view) {
+    class NotificationViewHolder(view: View, onItemDismiss: (Notification) -> Unit) :
+        RecyclerView.ViewHolder(view) {
         private val messageTextView: TextView = view.findViewById(R.id.notification_message)
         private val dismissButton: ImageButton = view.findViewById(R.id.notification_dismiss)
         private var currentNotification: Notification? = null
 
         init {
             dismissButton.setOnClickListener {
-                currentNotification?.let { onItemDismiss(it) }
+                currentNotification?.let { notification ->
+                    onItemDismiss(notification)
+                }
             }
         }
 
@@ -39,11 +42,18 @@ class NotificationsAdapter(
         holder.bind(notifications[position])
     }
 
-    override fun getItemCount() = notifications.size
+    override fun getItemCount(): Int {
+        return notifications.size
+    }
+
+    fun setData(newNotifications: MutableList<Notification>) {
+        notifications = newNotifications
+        notifyDataSetChanged()
+    }
 
     fun removeItem(notification: Notification) {
         val position = notifications.indexOf(notification)
-        if (position > -1) {
+        if (position != -1) {
             notifications.removeAt(position)
             notifyItemRemoved(position)
         }

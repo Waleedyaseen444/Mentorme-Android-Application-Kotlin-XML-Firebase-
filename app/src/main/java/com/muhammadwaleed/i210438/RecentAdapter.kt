@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class RecentAdapter(private val dataList: List<Recentdata>) : RecyclerView.Adapter<RecentAdapter.ViewHolder>() {
 
@@ -29,7 +31,13 @@ class RecentAdapter(private val dataList: List<Recentdata>) : RecyclerView.Adapt
         holder.occupationText.text = currentItem.occupationText
         holder.statusText.text = currentItem.statusText
         holder.priceText.text = currentItem.priceText
-        holder.profileIcon.setImageResource(currentItem.profileIconRes)
+
+        // Load mentor image using Glide
+        Glide.with(holder.itemView.context)
+            .load(currentItem.imageUrl)
+            .apply(RequestOptions.circleCropTransform())
+            .into(holder.profileIcon)
+
         holder.heartIcon.setImageResource(currentItem.heartIconRes)
     }
 

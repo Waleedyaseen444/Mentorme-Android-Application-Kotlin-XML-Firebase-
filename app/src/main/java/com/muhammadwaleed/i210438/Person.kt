@@ -5,3 +5,4 @@ data class Person(
     val messagePreview: String,
     val imageResource: Int
 )
+
