@@ -49,7 +49,7 @@ class VerifyActivity : AppCompatActivity() {
 
 
 
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, ResetPasswordActivity::class.java)
             startActivity(intent)
         }
     }

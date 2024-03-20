@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+
 import com.muhammadwaleed.i210438.R
 
 class SessionsAdapter(private val sessions: List<SessionDetails>, private val onClick: (SessionDetails) -> Unit) :
@@ -33,7 +35,8 @@ class SessionsAdapter(private val sessions: List<SessionDetails>, private val on
             professionTextView.text = session.profession
             dateTextView.text = session.date
             timeTextView.text = session.time
-            imageView.setImageResource(session.imageResource)
+            // Load image using Picasso
+            Picasso.get().load(session.imageUrl).into(imageView)
         }
     }
 

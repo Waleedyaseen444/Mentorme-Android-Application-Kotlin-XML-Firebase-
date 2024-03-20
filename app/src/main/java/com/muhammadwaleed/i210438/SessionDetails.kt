@@ -5,5 +5,10 @@ data class SessionDetails(
     val profession: String,
     val date: String,
     val time: String,
-    val imageResource: Int
-)
+    val imageUrl: String // Updated to store image URL
+) {
+    // No-argument constructor required for Firebase
+    constructor() : this("", "", "", "", "")
+}
+
+
