@@ -1,10 +1,12 @@
 package com.muhammadwaleed.i210438
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class CommunityAdapter(
     private val communityMembers: List<CommunityMember>,
@@ -15,7 +17,8 @@ class CommunityAdapter(
         private val profileImage: ImageView = itemView.findViewById(R.id.community_profile_image)
 
         fun bind(communityMember: CommunityMember) {
-            profileImage.setImageResource(communityMember.profileImageResource)
+            // Load image using Picasso
+            Picasso.get().load(communityMember.imageUrl).into(profileImage)
             itemView.setOnClickListener { onClick(communityMember) }
         }
     }
