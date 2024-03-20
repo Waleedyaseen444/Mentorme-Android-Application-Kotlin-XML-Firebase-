@@ -1,66 +1,156 @@
 package com.muhammadwaleed.i210438
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class Add : AppCompatActivity() {
+
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageRef: StorageReference
+    private lateinit var database: DatabaseReference
+
+    private var selectedImageUri: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
 
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference.child("mentor_images")
+        database = FirebaseDatabase.getInstance().reference.child("mentors")
+
+        val updateBtn = findViewById<Button>(R.id.btnUpload)
         val cameraButton: ImageButton = findViewById(R.id.imageButton)
         val videoButton: ImageButton = findViewById(R.id.imageButton2)
-        val updatebtn=findViewById<Button>(R.id.btnUpload)
-        updatebtn.setOnClickListener {
-            val intent = Intent(this, MainActivity3::class.java)
-            startActivity(intent)
-        }
+        val updateEducation = findViewById<Button>(R.id.button2)
 
         cameraButton.setOnClickListener {
-            val intent = Intent(this, Video::class.java)
-            startActivity(intent)
+            openGalleryForImage()
         }
-
 
         videoButton.setOnClickListener {
-            val intent = Intent(this, Camera::class.java)
-            startActivity(intent)
+            openGalleryForImage()
         }
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNav.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    val intent = Intent(this, MainActivity3::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.navigation_add -> {
-                    val intent = Intent(this, Add::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.navigation_chat -> {
-                    val intent = Intent(this, Chat::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.navigation_profile -> {
-                    val intent = Intent(this, Profile::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.navigation_search -> {
-                    val intent = Intent(this, Search::class.java)
-                    startActivity(intent)
-                    true
-                }
-                else -> false
+        updateBtn.setOnClickListener {
+            val nameInput = findViewById<EditText>(R.id.editTextText).text.toString()
+            val descriptionInput =
+                findViewById<EditText>(R.id.editTextTextMultiLine2).text.toString()
+            val availabilityInput = findViewById<EditText>(R.id.editTextText2).text.toString()
+
+            if (selectedImageUri != null) {
+                uploadImageAndMentor(nameInput, descriptionInput, availabilityInput, false)
+            } else {
+                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
             }
         }
+
+        updateEducation.setOnClickListener {
+            val nameInput = findViewById<EditText>(R.id.editTextText).text.toString()
+            val descriptionInput =
+                findViewById<EditText>(R.id.editTextTextMultiLine2).text.toString()
+            val availabilityInput = findViewById<EditText>(R.id.editTextText2).text.toString()
+
+            if (selectedImageUri != null) {
+                uploadImageAndMentor(nameInput, descriptionInput, availabilityInput, true)
+            } else {
+                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        resultLauncher.launch(intent)
+    }
+
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                selectedImageUri = data?.data
+            }
+        }
+
+    private fun uploadImageAndMentor(
+        name: String,
+        description: String,
+        availability: String,
+        isEducationMentor: Boolean
+    ) {
+        selectedImageUri?.let { imageUri ->
+            val imageRef = storageRef.child("${System.currentTimeMillis()}.jpg")
+            val uploadTask = imageRef.putFile(imageUri)
+
+            uploadTask.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                imageRef.downloadUrl
+            }.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+                    val imageUrl = downloadUri.toString()
+
+                    val newMentor = Mentorhome(
+                        name,
+                        description,
+                        availability,
+                        "$99/session",
+                        true,
+                        imageUrl
+                    )
+
+                    val mentorRef = if (isEducationMentor) {
+                        FirebaseDatabase.getInstance().reference.child("education_mentors")
+                    } else {
+                        FirebaseDatabase.getInstance().reference.child("mentors")
+                    }
+
+                    mentorRef.push().setValue(newMentor)
+
+                    val notificationRef =
+                        FirebaseDatabase.getInstance().reference.child("notifications").push()
+                    val notificationMessage = "New mentor added: $name"
+                    val notification = mapOf(
+                        "mentorAdded" to "true",  // Key for mentor addition
+                        "mentorName" to name,     // Mentor's name
+                        "timestamp" to ServerValue.TIMESTAMP
+                    )
+                    notificationRef.setValue(notification)
+
+                    Toast.makeText(
+                        this,
+                        "Mentor added successfully to ${if (isEducationMentor) "Education Mentors" else "Top Mentors"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Failed to upload image", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val EXTRA_NAME = "com.muhammadwaleed.i210438.EXTRA_NAME"
+        const val EXTRA_DESCRIPTION = "com.muhammadwaleed.i210438.EXTRA_DESCRIPTION"
+        const val EXTRA_AVAILABILITY = "com.muhammadwaleed.i210438.EXTRA_AVAILABILITY"
     }
 }
