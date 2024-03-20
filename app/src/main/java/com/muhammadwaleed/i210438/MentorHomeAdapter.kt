@@ -1,5 +1,6 @@
 package com.muhammadwaleed.i210438
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,16 @@ class MentorHomeAdapter(
     private val mentors: List<Mentorhome>,
     private val onClick: (Mentorhome) -> Unit
 ) : RecyclerView.Adapter<MentorHomeAdapter.MentorViewHolder>() {
+
+    private var onItemLongClickListener: OnItemLongClickListener? = null
+
+    interface OnItemLongClickListener {
+        fun onItemLongClick(mentor: Mentorhome)
+    }
+
+    fun setOnItemLongClickListener(listener: OnItemLongClickListener) {
+        this.onItemLongClickListener = listener
+    }
 
     inner class MentorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val nameTextView: TextView = view.findViewById(R.id.mentorNameTextView)
@@ -29,6 +40,10 @@ class MentorHomeAdapter(
             )
 
             itemView.setOnClickListener { onClick(mentor) }
+            itemView.setOnLongClickListener {
+                onItemLongClickListener?.onItemLongClick(mentor)
+                true
+            }
         }
     }
 
