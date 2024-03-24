@@ -27,6 +27,7 @@ class MainActivity3 : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance().reference.child("mentors")
 
+
         val notificationBtn = findViewById<ImageButton>(R.id.btnNotifications)
         notificationBtn.setOnClickListener {
             val intent = Intent(this, Notifications::class.java)
@@ -123,23 +124,8 @@ class MainActivity3 : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Add long press listener for adding to favorites
-        mentorHomeAdapter.setOnItemLongClickListener(object : MentorHomeAdapter.OnItemLongClickListener {
-            override fun onItemLongClick(mentor: Mentorhome) {
-                addToFavorites(mentor)
-            }
-        })
 
         topMentorsRecyclerView.adapter = mentorHomeAdapter
-    }
-
-    private fun addToFavorites(mentor: Mentorhome) {
-        val key = database.child("favorites").push().key
-        key?.let {
-            database.child("favorites").child(it).setValue(mentor)
-        }
-        // Notify the adapter that data set changed
-        mentorHomeAdapter.notifyDataSetChanged()
     }
 
     private fun fetchEducationMentors() {
@@ -201,4 +187,4 @@ class MainActivity3 : AppCompatActivity() {
     companion object {
         private const val ADD_MENTOR_REQUEST = 1
     }
-}
+}  

@@ -62,6 +62,8 @@ class Feedback : AppCompatActivity() {
             ref.setValue(feedback)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show()
+                    val myFirebaseMessagingService = MyFirebaseMessagingService()
+                    myFirebaseMessagingService.generateNotification(this,"Mentor me", " Feedback submitted successfully " )
                     finish()
                 }
                 .addOnFailureListener {

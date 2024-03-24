@@ -116,6 +116,8 @@ class Booking : AppCompatActivity() {
                             )
                             notificationRef.setValue(notification)
                             Toast.makeText(this, "Session Booked Successfully!", Toast.LENGTH_SHORT).show()
+                            val myFirebaseMessagingService = MyFirebaseMessagingService()
+                            myFirebaseMessagingService.generateNotification(this,"Mentor me", " Session Booked Successfully! " )
                             // After booking, navigate to Bookedsession activity
                             startActivity(intent)
                         }

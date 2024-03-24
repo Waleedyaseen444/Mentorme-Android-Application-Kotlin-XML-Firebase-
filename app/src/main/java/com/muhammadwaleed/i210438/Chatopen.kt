@@ -34,6 +34,8 @@ import java.util.*
 
 class Chatopen : AppCompatActivity() {
 
+    private var isSendingMessage = false
+
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var editTextMessage: EditText
@@ -130,8 +132,13 @@ class Chatopen : AppCompatActivity() {
         // Send message button click listener
         sendButton.setOnClickListener {
             val messageText = editTextMessage.text.toString().trim()
-            if (messageText.isNotEmpty()) {
+            if (messageText.isNotEmpty() && !isSendingMessage) {
+                isSendingMessage = true
                 sendMessage(messageText)
+                val myFirebaseMessagingService = MyFirebaseMessagingService()
+                myFirebaseMessagingService.generateNotification(this,"Mentor me", "Message sent " )
+            } else if (messageText.isEmpty()) {
+                Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -178,6 +185,21 @@ class Chatopen : AppCompatActivity() {
                 Toast.makeText(this, "Recording started", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    if (!isSendingMessage && offlineMessages.isNotEmpty()) {
+                        isSendingMessage = true
+                        syncOfflineMessages()
+                    }
+                }
+            })
+        }
+
+
 
         // Listen for new messages
         messagesReference.addChildEventListener(object : ChildEventListener {
@@ -237,9 +259,11 @@ class Chatopen : AppCompatActivity() {
             val message = Message(userId, messageText, System.currentTimeMillis(), null, null, null)
             messagesReference.push().setValue(message)
                 .addOnSuccessListener {
+                    isSendingMessage = false
                     editTextMessage.text.clear()
                 }
                 .addOnFailureListener {
+                    isSendingMessage = false
                     // Handle message sending failure
                     Toast.makeText(this, "Failed to send message", Toast.LENGTH_SHORT).show()
                     // Add message to offline list
@@ -247,6 +271,8 @@ class Chatopen : AppCompatActivity() {
                 }
         }
     }
+
+
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -636,9 +662,9 @@ class Chatopen : AppCompatActivity() {
     }
 
     private fun syncOfflineMessages() {
-        for (message in offlineMessages) {
+        if (offlineMessages.isNotEmpty()) {
+            val message = offlineMessages.removeAt(0)
             sendMessage(message.messageText)
         }
-        offlineMessages.clear()
     }
 }

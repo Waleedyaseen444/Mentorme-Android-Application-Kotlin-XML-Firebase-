@@ -62,6 +62,8 @@ class Mentordetails : AppCompatActivity() {
             val chatIntent = Intent(this, Chat::class.java)
             chatIntent.putExtra("COMMUNITY_MEMBER_IMAGE_URL", mentorImageUrl)
             chatIntent.putExtra("MENTOR_NAME", mentorName)
+            val myFirebaseMessagingService = MyFirebaseMessagingService()
+            myFirebaseMessagingService.generateNotification(this,"Mentor me", " Community joined successfully " )
             startActivity(chatIntent)
         }
     }

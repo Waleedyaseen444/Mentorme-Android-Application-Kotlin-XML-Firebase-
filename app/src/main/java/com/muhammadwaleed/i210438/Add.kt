@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -125,21 +126,14 @@ class Add : AppCompatActivity() {
 
                     mentorRef.push().setValue(newMentor)
 
-                    val notificationRef =
-                        FirebaseDatabase.getInstance().reference.child("notifications").push()
-                    val notificationMessage = "New mentor added: $name"
-                    val notification = mapOf(
-                        "mentorAdded" to "true",  // Key for mentor addition
-                        "mentorName" to name,     // Mentor's name
-                        "timestamp" to ServerValue.TIMESTAMP
-                    )
-                    notificationRef.setValue(notification)
 
                     Toast.makeText(
                         this,
                         "Mentor added successfully to ${if (isEducationMentor) "Education Mentors" else "Top Mentors"}",
                         Toast.LENGTH_SHORT
                     ).show()
+                    val myFirebaseMessagingService = MyFirebaseMessagingService()
+                    myFirebaseMessagingService.generateNotification(this,"Mentor me", "Mentor added Successfully  " )
                     finish()
                 } else {
                     Toast.makeText(this, "Failed to upload image", Toast.LENGTH_SHORT).show()
@@ -147,6 +141,7 @@ class Add : AppCompatActivity() {
             }
         }
     }
+
 
     companion object {
         const val EXTRA_NAME = "com.muhammadwaleed.i210438.EXTRA_NAME"

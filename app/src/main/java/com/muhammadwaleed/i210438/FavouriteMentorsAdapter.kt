@@ -26,7 +26,7 @@ class FavouriteMentorsAdapter(private val mentors: List<Mentor>) :
     override fun onBindViewHolder(holder: MentorViewHolder, position: Int) {
         val mentor = mentors[position]
         holder.nameTextView.text = mentor.name
-        holder.professionTextView.text = mentor.profession
+        holder.professionTextView.text = mentor.occupation
         holder.heartImageView.setImageResource(
             if (mentor.isFavorite) R.drawable.hearts else R.drawable.ic_heart_outline
         )

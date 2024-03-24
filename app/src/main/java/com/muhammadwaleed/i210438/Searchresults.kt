@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.muhammadwaleed.i210438.RecentAdapter.OnItemClickListener
 
-class Searchresults : AppCompatActivity() {
+class Searchresults : AppCompatActivity(), OnItemClickListener {
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecentAdapter
     private lateinit var database: DatabaseReference
@@ -85,20 +85,31 @@ class Searchresults : AppCompatActivity() {
                                 mentor.occupation ?: "",
                                 mentor.status ?: "",
                                 mentor.pricePerSession ?: "",
-                                mentor.imageUrl ?: "", // Use mentor image URL
+                                mentor.imageUrl ?: "",
                             ))
                         }
                     }
                 }
                 Log.d("SearchResults", "Filtered List Size: ${mentorList.size}")
-                adapter = RecentAdapter(mentorList)
+
+                // Set the adapter with click listener
+                adapter = RecentAdapter(mentorList, this@Searchresults)
                 recyclerView.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
                 Log.e("SearchResults", "Firebase fetch error: ${error.message}")
             }
         })
+    }
+
+    // Handle item clicks
+    override fun onItemClick(item: Recentdata) {
+        val intent = Intent(this, Mentordetails::class.java).apply {
+            putExtra("MENTOR_NAME", item.sampleText)
+            putExtra("MENTOR_DESCRIPTION", item.occupationText)
+            putExtra("MENTOR_IMAGE_URL", item.imageUrl)
+        }
+        startActivity(intent)
     }
 }

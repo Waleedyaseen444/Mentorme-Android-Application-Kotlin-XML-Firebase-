@@ -9,7 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class RecentAdapter(private val dataList: List<Recentdata>) : RecyclerView.Adapter<RecentAdapter.ViewHolder>() {
+class RecentAdapter(private val dataList: List<Recentdata>, private val listener: OnItemClickListener) : RecyclerView.Adapter<RecentAdapter.ViewHolder>() {
+
+    // Interface for item click listener
+    interface OnItemClickListener {
+        fun onItemClick(item: Recentdata)
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val profileIcon: ImageView = itemView.findViewById(R.id.profileIcon)
@@ -39,6 +44,11 @@ class RecentAdapter(private val dataList: List<Recentdata>) : RecyclerView.Adapt
             .into(holder.profileIcon)
 
         holder.heartIcon.setImageResource(currentItem.heartIconRes)
+
+        // Handle item clicks
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(currentItem)
+        }
     }
 
     override fun getItemCount(): Int {

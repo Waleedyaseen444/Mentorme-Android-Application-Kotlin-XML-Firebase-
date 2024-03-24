@@ -43,6 +43,7 @@ class Bookedsession : AppCompatActivity() {
         if (userId != null) {
             myRef = database.getReference("users/$userId/booked_sessions")
 
+
             // Read data from Firebase
             myRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

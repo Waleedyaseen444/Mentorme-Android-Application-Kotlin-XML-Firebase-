@@ -27,7 +27,6 @@ class Profile : AppCompatActivity() {
     private lateinit var userEmail: String
     private lateinit var profileImageView: CircleImageView
     private lateinit var sharedPreferences: SharedPreferences
-
     private lateinit var reviewsAdapter: ReviewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +46,8 @@ class Profile : AppCompatActivity() {
             val intent = Intent(this, Editprofile::class.java)
             startActivity(intent)
         }
+
+
 
         val backButton = findViewById<ImageButton>(R.id.imageButton9)
         backButton.setOnClickListener {
