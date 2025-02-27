@@ -7,7 +7,6 @@
     android:background="#DBF8F2"
     tools:context=".Add">
 
-
     <ImageView
         android:id="@+id/outerCircle"
         android:layout_width="118dp"
@@ -63,9 +62,10 @@
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541" />
+        app:layout_constraintVertical_bias="0.475" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine2"
@@ -81,14 +81,14 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.603" />
 
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="265dp"
         android:layout_height="56dp"
         android:background="@drawable/rectangle"
-        android:backgroundTint="#02332F"
+        android:backgroundTint="#05433D"
         android:text="Upload"
         android:textColor="#EDEAEA"
         android:textSize="24sp"
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869" />
+        app:layout_constraintVertical_bias="0.829" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -105,10 +105,10 @@
         android:background="@drawable/rounded_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.344"
+        app:layout_constraintVertical_bias="0.302"
         app:srcCompat="@drawable/video" />
 
     <ImageButton
@@ -121,7 +121,7 @@
         app:layout_constraintHorizontal_bias="0.783"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342"
+        app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@drawable/camera" />
 
     <EditText
@@ -130,7 +130,7 @@
         android:layout_height="49dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
-        android:hint="Enter Avalability"
+        android:hint="Enter Availability"
         android:inputType="text"
         android:textColor="#F1EEEE"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,18 +138,31 @@
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:theme="@style/BottomNavigationViewStyle"
         app:menu="@menu/navigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="#05433D"
+        android:text="Upload As Education mentor"
+        android:textColor="#F1EEEE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

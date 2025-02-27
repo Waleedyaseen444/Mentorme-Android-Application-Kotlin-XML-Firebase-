@@ -1,0 +1,83 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="140dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="#C0C0C0">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/mentorDetailContainer"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edit_text2"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/mentorNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textStyle="bold"
+                    android:textSize="8sp"
+                    android:textColor="#011201"/>
+
+                <TextView
+                    android:id="@+id/mentorOccupationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UX Designer @ Google"
+                    android:textColor="#011201"
+                    android:textSize="8sp"/>
+
+                <TextView
+                    android:id="@+id/mentorStatusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="#00FF00"
+                    android:textSize="8sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical|end"
+                android:layout_gravity="center_vertical|end">
+
+                <TextView
+                    android:id="@+id/mentorPriceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$99/session"
+                    android:textColor="#FFFF00"
+                    android:textSize="10sp"
+                    android:gravity="end"/>
+
+                <ImageView
+                    android:id="@+id/favoriteImageView"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_heart_outline"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="end"
+                    app:tint="#FF0000" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

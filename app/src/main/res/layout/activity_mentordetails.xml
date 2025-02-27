@@ -119,18 +119,18 @@
         app:srcCompat="@drawable/yellow_star_15589" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/textView12"
+        android:id="@+id/mentorImageView"
         android:layout_width="95dp"
-        android:layout_height="97dp"
+        android:layout_height="95dp"
         android:src="@drawable/imag4"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintVertical_bias="0.083" />
 
     <TextView
         android:id="@+id/textView37"

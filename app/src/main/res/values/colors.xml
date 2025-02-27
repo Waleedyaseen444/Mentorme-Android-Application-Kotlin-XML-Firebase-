@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#304FFE</color>
+    <color name="colorPrimaryDark">#0026CA</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorText">#212121</color>
+    <color name="colorSplashText">#FFFFFF</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="title_add">#212121</color>
+    <color name="selected_category">#12D1BF</color>
+    <color name="unselected_category">#069789</color>
+
+
+
+
+</resources>

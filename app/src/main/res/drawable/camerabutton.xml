@@ -1,0 +1,16 @@
+<!-- white_circle_with_greenish_blue_edges.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#FF0000" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+            <stroke
+                android:width="10dp"
+                android:color="#054741" />
+        </shape>
+    </item>
+</selector>

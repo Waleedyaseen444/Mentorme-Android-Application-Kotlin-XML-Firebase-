@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- Profile Icon -->
+    <ImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/profile_icon"
+        android:background="@drawable/rounded_square_light_silver" />
+
+    <!-- Text Box with White Rounded Rectangle Background -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:background="@drawable/rounded_edit_text"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Sample Text -->
+            <TextView
+                android:id="@+id/sampleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sample"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <!-- Occupation Text -->
+            <TextView
+                android:id="@+id/occupationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Occupation"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <!-- Status Text -->
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available"
+                android:textColor="#00FF00"
+                android:textSize="12sp" />
+
+            <!-- Price Text and Heart Icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <!-- Heart Icon -->
+                <ImageView
+                    android:id="@+id/heartIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/hearts" />
+
+                <!-- Price Text -->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/priceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="240dp"
+
+                android:text="$50"
+                android:textColor="#FFD700"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

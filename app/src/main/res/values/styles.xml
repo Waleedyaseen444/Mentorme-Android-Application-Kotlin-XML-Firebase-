@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <style name="BottomNavigationViewStyle">
+
+        <item name="android:background">#008496</item>
+
+        <item name="itemIconTint">@color/white</item>
+    </style>
+
+    <style name="CircularImageView" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="circularImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="YellowRatingBar" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#FFEB3B</item>
+        <item name="colorControlActivated">#FFEB3B</item>
+    </style>
+</resources>

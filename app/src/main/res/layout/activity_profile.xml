@@ -157,6 +157,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.272" />
 
+
+
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
@@ -272,6 +274,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.037"
         app:srcCompat="@drawable/arrow_back" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="38dp"
+        android:layout_height="42dp"
+        android:background="@drawable/circ"
+        android:backgroundTint="#009688"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314"
+        app:srcCompat="@drawable/edit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

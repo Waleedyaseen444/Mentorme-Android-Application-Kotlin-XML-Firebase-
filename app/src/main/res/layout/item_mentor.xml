@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_background"
+    android:padding="8dp">
+
+    <!-- Mentor Name -->
+<TextView
+android:id="@+id/textName"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="John Doe"
+android:textSize="14sp"
+android:textColor="#000" />
+
+    <!-- Mentor Occupation -->
+<TextView
+android:id="@+id/textOccupation"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Software Engineer"
+android:textSize="12sp"
+android:textColor="#666" />
+
+    <!-- Mentor Status -->
+<TextView
+android:id="@+id/textStatus"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Available"
+android:textSize="12sp"
+android:textColor="#333" />
+    </LinearLayout>

@@ -1,0 +1,60 @@
+<!-- mentor_card_view.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Mentor name -->
+        <TextView
+            android:id="@+id/mentorNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mentor Name"
+            android:textSize="18sp" />
+
+        <!-- Mentor description -->
+        <TextView
+            android:id="@+id/mentorDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mentor Description"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Mentor price -->
+        <TextView
+            android:id="@+id/mentorPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: $100"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/holo_orange_dark"/>
+
+        <!-- Mentor availability -->
+        <TextView
+            android:id="@+id/availabilityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/holo_green_dark"/>
+
+        <!-- Heart shape -->
+        <ImageView
+            android:id="@+id/heartImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hearts"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="bottom|end"/> <!-- Adjusted layout_gravity -->
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
